@@ -32,16 +32,16 @@ class MyApp extends StatelessWidget {
   }
 
   Future<void> shareScreenShot() async {
-    Directory directory;
+    Directory? directory;
     if (Platform.isAndroid) {
       directory = await getExternalStorageDirectory();
     } else {
       directory = await getApplicationDocumentsDirectory();
     }
     final String localPath =
-        '${directory.path}/${DateTime.now().toIso8601String()}.png';
+        '${directory!.path}/${DateTime.now().toIso8601String()}.png';
 
-    await _controller.capture(path: localPath);
+    await _controller.capture();
 
     await Future.delayed(Duration(seconds: 1));
 

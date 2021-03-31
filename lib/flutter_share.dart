@@ -15,18 +15,18 @@ class FlutterShare {
   /// - LinkUrl: Is the [linkUrl] to include with the message.
   /// - ChooserTitle (Just for Android): Is the [chooserTitle] of the app
   /// chooser popup. If null the system default title will be used.
-  static Future<bool> share(
-      {@required String title,
-      String text,
-      String linkUrl,
-      String chooserTitle}) async {
+  static Future<bool?> share(
+      {required String title,
+      String? text,
+      String? linkUrl,
+      String? chooserTitle}) async {
     assert(title != null && title.isNotEmpty);
 
     if (title == null || title.isEmpty) {
       throw FlutterError('Title cannot be null');
     }
 
-    final bool success = await _channel.invokeMethod('share', <String, dynamic>{
+    final bool? success = await _channel.invokeMethod('share', <String, dynamic>{
       'title': title,
       'text': text,
       'linkUrl': linkUrl,
@@ -44,11 +44,11 @@ class FlutterShare {
   /// - FilePath: Is the [filePath] to include with the message.
   /// - ChooserTitle (Just for Android): Is the [chooserTitle] of the app
   /// chooser popup. If null the system default title will be used.
-  static Future<bool> shareFile(
-      {@required String title,
-      @required String filePath,
-      String text,
-      String chooserTitle}) async {
+  static Future<bool?> shareFile(
+      {required String title,
+      required String filePath,
+      String? text,
+      String? chooserTitle}) async {
     assert(title != null && title.isNotEmpty);
     assert(filePath != null && filePath.isNotEmpty);
 
@@ -58,7 +58,7 @@ class FlutterShare {
       throw FlutterError('FilePath cannot be null');
     }
 
-    final bool success =
+    final bool? success =
         await _channel.invokeMethod('shareFile', <String, dynamic>{
       'title': title,
       'text': text,
